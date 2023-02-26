@@ -1,0 +1,10 @@
+Stanford Core NLP
+Before moving on to execute the code we need to start the Stanford Core NLP server on our local machine.
+To do that follow the steps below (tested on debian should work fine for other distributions too):
+
+Download the Stanford Core NLP model from here.
+Unizip the folder
+cd into the folder
+cd stanford-corenlp-4.0.0/
+Start the server using this command:
+java -mx5g -cp "./*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -timeout 10000
