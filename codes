@@ -12,3 +12,14 @@ java -mx5g -cp "./*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -timeout 10
 
 https://github.com/nltk/nltk/issues/2010
 java -mx4g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -preload tokenize,ssplit,pos,lemma,ner,parse,depparse -status_port 9000 -port 9000 -timeout 15000 &
+
+
+>>> from nltk.parse import CoreNLPParser
+>>> parser = CoreNLPParser(url='http://localhost:9000')
+>>> list(parser.parse(['house', ')', 'is', 'in', 'York', 'Avenue']))
+[Tree('ROOT', [Tree('S', [Tree('NP', [Tree('NN', ['house']), Tree('-RRB-', ['-RRB-'])]), Tree('VP', [Tree('VBZ', ['is']), Tree('PP', [Tree('IN', ['in']), Tree('NP', [Tree('NNP', ['York']), Tree('NNP', ['Avenue'])])])])])])]
+
+>>> tagger = CoreNLPParser(url='http://localhost:9000', tagtype='ner')
+>>> tokens = 'Rami Eid is studying at Stony Brook University in NY'.split()
+>>> tagger.tag(tokens)
+[('Rami', 'PERSON'), ('Eid', 'PERSON'), ('is', 'O'), ('studying', 'O'), ('at', 'O'), ('Stony', 'ORGANIZATION'), ('Brook', 'ORGANIZATION'), ('University', 'ORGANIZATION'), ('in', 'O'), ('NY', 'STATE_OR_PROVINCE')]
